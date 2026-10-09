@@ -13,6 +13,9 @@ dist/
 README.preview.html
 docs/readme-preview.html
 release/
+**/release/
+*.app/
+**/*.app/
 # Keep the large captured DOM/screenshot fixtures local, but version the
 # canonical renderer sources that generate both platform assets.
 runtime/*
