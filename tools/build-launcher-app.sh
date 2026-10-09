@@ -16,11 +16,30 @@ fi
 # Create launcher script
 cat > "$BUNDLE/Contents/MacOS/launcher" <<'EOF'
 #!/bin/bash
-ROOT="$(cd "$(dirname "$0")/../../.." && pwd -P)"
 export COPYFILE_DISABLE=1
 
-# Run the startup script with startup animation in the background
-"$ROOT/macos/scripts/start-dream-skin-macos.sh" --startup-animation >/dev/null 2>&1 &
+# Resolve script root
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd -P)"
+if [ ! -f "$ROOT/macos/scripts/start-dream-skin-macos.sh" ]; then
+  if [ -f "/Volumes/onn Disk/Codex-Theme/macos/scripts/start-dream-skin-macos.sh" ]; then
+    ROOT="/Volumes/onn Disk/Codex-Theme"
+  elif [ -f "$HOME/.codex/codex-dream-skin-studio/scripts/start-dream-skin-macos.sh" ]; then
+    ROOT="$HOME/.codex/codex-dream-skin-studio"
+  fi
+fi
+
+if [ ! -f "$ROOT/macos/scripts/start-dream-skin-macos.sh" ]; then
+  /usr/bin/osascript -e 'display alert "Codex Theme Launcher" message "Không tìm thấy thư mục Codex-Theme. Vui lòng giữ file App ở cùng thư mục dự án hoặc cắm lại ổ đĩa ngoài."'
+  exit 1
+fi
+
+# Run with prompt-restart and startup-animation
+OUTPUT="$("$ROOT/macos/scripts/start-dream-skin-macos.sh" --prompt-restart --startup-animation 2>&1)"
+STATUS=$?
+
+if [ $STATUS -ne 0 ] && [ $STATUS -ne 20 ]; then
+  /usr/bin/osascript -e "display alert \"Codex Theme Launcher\" message \"Khởi chạy thất bại: $OUTPUT\""
+fi
 EOF
 
 chmod +x "$BUNDLE/Contents/MacOS/launcher"

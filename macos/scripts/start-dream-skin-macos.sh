@@ -64,6 +64,12 @@ case "$PORT" in ''|*[!0-9]*) fail "Invalid port: $PORT" ;; esac
 [ "$PORT" -ge 1024 ] && [ "$PORT" -le 65535 ] || fail "Port must be between 1024 and 65535."
 
 ensure_state_root
+if [ ! -f "$THEME_DIR/theme.json" ]; then
+  seed_bundled_presets 2>/dev/null || true
+  if [ -x "$SCRIPT_DIR/switch-theme-macos.sh" ]; then
+    "$SCRIPT_DIR/switch-theme-macos.sh" --id preset-gothic-void-crusade --no-apply >/dev/null 2>&1 || true
+  fi
+fi
 if [ "$FOREGROUND_INJECTOR" != "true" ]; then
   OPERATION_TOKEN="$(new_operation_token)"
   write_operation_state applying "$(dreamskin_text applying_skin)" "$OPERATION_TOKEN" \

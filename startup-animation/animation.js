@@ -185,9 +185,10 @@
   currentLang = detectLang();
   window.currentLang = currentLang;
 
-  function t(key) {
+  function getText(key) {
     return I18N[currentLang]?.[key] || I18N.en[key] || I18N.vi[key] || key;
   }
+  const t = getText;
 
   function setLanguage(lang) {
     if (!I18N[lang]) lang = 'vi';
@@ -346,9 +347,9 @@
     if(dissolve>0)drawIdentityPieces(dissolve);
   }
 
-  function render(t) {
-    const s = t / 1000;
-    const p = progress(t);
+  function render(timeMs) {
+    const s = timeMs / 1000;
+    const p = progress(timeMs);
     const color = smooth((s - 7.2) / .42);
     const dissolve = clamp((s - 4.18) / .56);
 
@@ -387,10 +388,10 @@
       node.style.transform=`translate(${Math.sin(s*.4+i)*8}px,${-s*(2+i%3)}px)`;
     });
     subtitle.style.opacity=String(smooth((s-7.6)/.4)*(1-smooth((s-10.65)/.25)));
-    if(Math.abs(t-lastUI)>60 || t===0 || t>=duration) {
-      lastUI=t;
+    if(Math.abs(timeMs-lastUI)>60 || timeMs===0 || timeMs>=duration) {
+      lastUI=timeMs;
       $('#ratio').textContent=`${(p*100).toFixed(2).padStart(5,'0')}%`;
-      $('.sync-phase').textContent=s<6.5?t('initializing'):p<1?t('synchronizing'):t('syncComplete');
+      $('.sync-phase').textContent=s<6.5?getText('initializing'):p<1?getText('synchronizing'):getText('syncComplete');
       $('#timecode').textContent=`00:${String(Math.floor(s)).padStart(2,'0')}:${String(Math.floor(s%1*30)).padStart(2,'0')}`;
       slider.value=String(s);
       $('#elapsed').innerHTML=`${s.toFixed(1).padStart(4,'0')} <span>/ 12.0s</span>`;
@@ -459,7 +460,7 @@
     document.body.classList.add('native');
   }
   function ready(){if(loaded)return;loaded=true;render(0);send('ready');if(window.AEMEATH_OPEN_SETTINGS||new URLSearchParams(location.search).has('settings'))openSettings();else play();}
-  function failed(){stop();$('#asset-error').hidden=false;send('assetError');}
+  function failed(err){console.error('FATAL ANIMATION ERROR:', err);stop();$('#asset-error').hidden=false;send('assetError', {message: err?.message || String(err), stack: err?.stack});}
   let savedImages={},pendingImages={},busy=false;
   const settings=$('#settings-dialog'),status=$('#settings-status');
   const textFields=[

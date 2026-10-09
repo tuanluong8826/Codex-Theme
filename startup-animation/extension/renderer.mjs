@@ -68,7 +68,7 @@ export function installRenderer(payload, mount) {
     if(data.action==='background')background(data);
     if(data.action==='ready'){ready=true;phase='playing';}
     if(data.action==='complete'){completed=true;phase='complete';removeOverlay();}
-    if(data.action==='assetError'){phase='failed';removeOverlay();}
+    if(data.action==='assetError'){phase='failed';window.__lastAssetError=data.message||'unknown';console.error('AssetError:', data.message, data.stack);removeOverlay();}
     if(data.action==='settings-open'){phase='settings';clearTimeout(watchdog);}
     if(data.action==='settings-close'){phase='playing';watchdog=setTimeout(removeOverlay,25000);}
     if(data.action==='restore')dispose();
