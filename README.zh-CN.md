@@ -217,6 +217,18 @@ macOS 菜单栏和 Windows 托盘都有「主题库 Gallery」和「在线 Studi
 - 非 OpenAI 官方产品；Codex 及相关权利归其权利人
 - 随仓库预设及效果图中的人物 / IP 素材仅作主题示意；商用或公开再分发请自行确认肖像、素材与商标权利
 
+## 🏷️ 上游致谢与来源 (Credits & Sources)
+
+本项目基于并整合了以下两个优秀的开源项目：
+
+1. **[Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin)**（作者：**[Fei-Away](https://github.com/Fei-Away)**）：
+   - 提供核心主题引擎、壁纸注入、Safe CSS 校验机制以及 macOS Menu Bar / Windows 托盘管理客户端。
+2. **[codex-startup-animation](https://github.com/panding999/codex-startup-animation)**（作者：**[panding999](https://github.com/panding999)**）：
+   - 提供 12 秒脉冲/雷达/轮廓线条/壁纸展开的电影级启动动画灵感与实现。
+
+谨向原作者们的卓越贡献致以诚挚的感谢！
+
 ---
 
 Star 一下，然后挑一张图，把你的 Codex 变成今天想要的样子。
+

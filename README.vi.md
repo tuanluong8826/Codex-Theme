@@ -120,3 +120,17 @@ Codex-Theme/
 - Không can thiệp vào mô hình AI, tài khoản hay tính năng trò chuyện của Codex.
 - Giao tiếp qua cổng gỡ lỗi cục bộ loopback `127.0.0.1` của Chromium.
 - Khi muốn quay về nguyên bản, chỉ cần thoát hẳn ứng dụng và mở lại bằng biểu tượng Codex chính thức.
+
+---
+
+## 🏷️ Nguồn gốc & Bản quyền (Credits & Upstream Sources)
+
+Dự án này là sản phẩm tích hợp và phát triển từ hai dự án mã nguồn mở tuyệt vời:
+
+1. **[Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin)** của tác giả **[Fei-Away](https://github.com/Fei-Away)**:
+   - Động cơ giao diện, cơ chế tuỳ biến hình nền, Safe CSS validator và ứng dụng Menu Bar (macOS) / System Tray (Windows).
+2. **[codex-startup-animation](https://github.com/panding999/codex-startup-animation)** của tác giả **[panding999](https://github.com/panding999)**:
+   - Ý tưởng và hiệu ứng khởi động 12 giây đậm chất điện ảnh (radar xoay, xung nhịp đại diện, phân rã mảnh ghép và vẽ viền nét chuyển màu).
+
+Chân thành cảm ơn các tác giả gốc đã cống hiến những sản phẩm mã nguồn mở xuất sắc!
+

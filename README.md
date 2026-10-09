@@ -235,6 +235,18 @@ Platform scripts are ready — different plumbing, same goal: theme Codex.
 - Unofficial; Codex and related rights belong to their owners.
 - People / IP material in bundled presets and previews is illustrative only — clear likeness, asset and trademark rights before commercial redistribution.
 
+## 🏷️ Credits & Upstream Sources
+
+This unified project integrates, adapts, and builds upon two remarkable open-source projects:
+
+1. **[Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin)** by **[Fei-Away](https://github.com/Fei-Away)**:
+   - Theme engine, custom wallpaper injection, Safe CSS validator, and Menu Bar / System Tray controls for macOS & Windows.
+2. **[codex-startup-animation](https://github.com/panding999/codex-startup-animation)** by **[panding999](https://github.com/panding999)**:
+   - 12-second cinematic startup animation (radar, pulse, fragment dispersion, and contour line drawing).
+
+Heartfelt gratitude to the original creators and contributors for their outstanding work!
+
 ---
 
 Star it, pick a look, and make Codex yours for today.
+
