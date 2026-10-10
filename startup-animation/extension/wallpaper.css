@@ -27,4 +27,27 @@ html[data-aemeath-skin] body{
 }
 html[data-aemeath-skin] :is(#root,[data-app-shell-frame],[data-app-shell-page-surface=true]){background:transparent!important}
 html[data-aemeath-skin] .app-shell-left-panel{background:rgb(var(--aemeath-base)/.18)!important}
+
+/* Antigravity surfaces and glassmorphic translucency */
+html[data-aemeath-skin] .bg-background {
+  background-color: rgb(var(--aemeath-base) / .65) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+html[data-aemeath-skin] .bg-sidebar {
+  background-color: rgb(var(--aemeath-base) / .50) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+html[data-aemeath-skin] .bg-card {
+  background-color: rgb(var(--aemeath-base) / .40) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+/* Ensure code editor readability */
+html[data-aemeath-skin] :is(pre, code, .monaco-editor) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
 /* Menus, dialogs and floating panels keep their original opaque theme tokens. */
+

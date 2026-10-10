@@ -1,0 +1,150 @@
+/* Antigravity Dream Skin - Unified Theme for Google Antigravity */
+
+:root {
+  --ag-wallpaper-opacity: 0.92;
+  --ag-wallpaper-blur: 0px;
+  --ag-glass-blur: 16px;
+  --ag-bg-alpha: 0.80;
+  --ag-sidebar-alpha: 0.72;
+  --ag-card-alpha: 0.65;
+  --ag-accent-color: #ec4899;
+}
+
+/* Base Dark & Light translucent overrides */
+body.theme-dark,
+body:not(.theme-light) {
+  --ag-bg-translucent: rgba(14, 16, 22, var(--ag-bg-alpha));
+  --ag-sidebar-translucent: rgba(10, 12, 17, var(--ag-sidebar-alpha));
+  --ag-card-translucent: rgba(22, 26, 36, var(--ag-card-alpha));
+  --ag-border-subtle: rgba(255, 255, 255, 0.08);
+  --ag-card-border: rgba(255, 255, 255, 0.12);
+}
+
+body.theme-light {
+  --ag-bg-translucent: rgba(248, 249, 251, var(--ag-bg-alpha));
+  --ag-sidebar-translucent: rgba(240, 242, 246, var(--ag-sidebar-alpha));
+  --ag-card-translucent: rgba(255, 255, 255, var(--ag-card-alpha));
+  --ag-border-subtle: rgba(0, 0, 0, 0.08);
+  --ag-card-border: rgba(0, 0, 0, 0.10);
+}
+
+/* Wallpaper layer placed at the lowest stacking context */
+#__antigravity_wallpaper {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: -9999 !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  pointer-events: none !important;
+  opacity: var(--ag-wallpaper-opacity, 0.92) !important;
+  filter: blur(var(--ag-wallpaper-blur, 0px)) !important;
+  transform: translateZ(0) !important;
+  transition: opacity 0.4s ease, filter 0.4s ease !important;
+}
+
+/* Translucent surfaces with Glassmorphism */
+.bg-background {
+  background-color: var(--ag-bg-translucent) !important;
+  backdrop-filter: blur(var(--ag-glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--ag-glass-blur)) !important;
+}
+
+.bg-sidebar {
+  background-color: var(--ag-sidebar-translucent) !important;
+  backdrop-filter: blur(var(--ag-glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--ag-glass-blur)) !important;
+  border-right: 1px solid var(--ag-border-subtle) !important;
+}
+
+.bg-card {
+  background-color: var(--ag-card-translucent) !important;
+  backdrop-filter: blur(calc(var(--ag-glass-blur) * 0.75)) !important;
+  -webkit-backdrop-filter: blur(calc(var(--ag-glass-blur) * 0.75)) !important;
+  border: 1px solid var(--ag-card-border) !important;
+}
+
+/* Sidebar and Navigation items hover polish */
+.bg-sidebar button:hover,
+.bg-sidebar a:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Chat Input Bar and Action Panels */
+form textarea,
+form input {
+  background-color: rgba(20, 24, 34, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--ag-card-border) !important;
+}
+
+body.theme-light form textarea,
+body.theme-light form input {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid var(--ag-card-border) !important;
+}
+
+/* Code block protection: Preserve crystal-clear contrast and syntax highlighting */
+pre,
+code,
+.monaco-editor,
+[class*="code-block"],
+[class*="syntax-highlight"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+pre {
+  background-color: rgba(16, 18, 25, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.theme-light pre {
+  background-color: rgba(244, 245, 249, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.45);
+}
+
+/* Startup animation overlay inside Antigravity */
+#__antigravity_startup_frame {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 2147483647 !important;
+  border: none !important;
+  background: #000000 !important;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+#__antigravity_startup_frame.hidden {
+  opacity: 0 !important;
+  transform: scale(1.02) !important;
+  pointer-events: none !important;
+}

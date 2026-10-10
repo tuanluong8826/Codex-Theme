@@ -60,7 +60,7 @@
 
 1. Đóng hoàn toàn ứng dụng Codex đang chạy.
 2. **Khởi chạy kèm hoạt ảnh khởi động**:
-   - Nhấp đúp vào: `Start-Codex-With-Animation.bat`
+   - Nhấp đúp vào: `Start-Codex-With-Animation.bat` hoặc mở `Codex.exe`
    - Hoặc chạy qua PowerShell:
      ```powershell
      powershell -ExecutionPolicy Bypass -File .\windows\scripts\start-dream-skin.ps1 -PromptRestart -StartupAnimation
@@ -69,6 +69,28 @@
    - Nhấp đúp vào: `Start-Codex.bat`
 4. **Xem thử hoạt ảnh**:
    - Nhấp đúp vào: `Preview-Startup-Animation.bat`
+
+---
+
+## 🌌 Hỗ trợ Google Antigravity (Antigravity IDE & 2.0)
+
+Dự án hỗ trợ toàn diện môi trường làm việc **Google Antigravity**:
+- **Hiệu ứng khởi động 12s**: Tương thích hoàn hảo cả dưới dạng launcher ứng dụng và lớp phủ trực tiếp trong Antigravity.
+- **Dream Skin & Hình nền (Glassmorphism)**: Tự động thêm hình nền tùy biến và hiệu ứng kính mờ cho thanh bên, khung chat và thẻ công việc mà không làm giảm độ rõ của mã nguồn.
+
+### Cách sử dụng cho Antigravity:
+- **macOS**:
+  - Nhấp đúp vào: `Start Antigravity (Theme + Animation).command`
+  - Hoặc mở ứng dụng: `AntigravityLauncher.app` (nằm ở thư mục gốc hoặc trong `/Applications/`)
+  - Chạy lệnh Terminal: `bash antigravity/scripts/start-antigravity-skin-macos.sh`
+- **Windows**:
+  - Nhấp đúp vào: `Start-Antigravity-With-Animation.bat` hoặc chạy `AntigravityLauncher.exe`
+  - Hoặc chạy PowerShell: `.\antigravity\scripts\start-antigravity-skin-windows.ps1`
+- **Tùy chỉnh trực tiếp trong Antigravity (UI Extension Plugin)**:
+  - Vào thanh bên trái -> Chọn **Customizations** -> Thẻ **Installed**.
+  - Bật plugin **Codex Theme & Animation**.
+  - Vào bất kỳ cuộc trò chuyện nào, nhấn menu **⋮** (ba chấm) góc trên bên phải -> Chọn **Codex Theme & Animation** để mở bảng điều khiển (đổi hình nền, chỉnh độ mờ kính, bật/tắt hoạt ảnh và âm thanh trực tiếp)!
+
 
 ---
 

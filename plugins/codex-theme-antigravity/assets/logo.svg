@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0d1117"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="url(#paint_linear)" stroke-width="2"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#ec4899" stroke-width="2.5" stroke-dasharray="4 2"/>
+  <circle cx="32" cy="32" r="9" fill="url(#paint_radial)"/>
+  <path d="M32 10v6 M32 48v6 M10 32h6 M48 32h6" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="paint_linear" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="paint_radial" cx="32" cy="32" r="9" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </radialGradient>
+  </defs>
+</svg>

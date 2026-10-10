@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Codex Theme for Antigravity</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/preload.js"></script>
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="panel-container">
+    <header class="panel-header">
+      <div class="badge">CODEX THEME</div>
+      <h1 id="txt-title">Giao diện & Hoạt ảnh</h1>
+      <p class="subtitle" id="txt-subtitle">Tùy biến hình nền, hiệu ứng kính và hoạt ảnh 12s cho Antigravity</p>
+    </header>
+
+    <section class="card">
+      <div class="row header-row">
+        <div>
+          <label class="title" id="txt-theme-enable">Bật giao diện Dream Skin</label>
+          <p class="desc" id="txt-theme-desc">Áp dụng hình nền và hiệu ứng kính mờ cho Antigravity</p>
+        </div>
+        <input type="checkbox" id="chk-enabled" class="toggle" checked>
+      </div>
+    </section>
+
+    <section class="card">
+      <label class="section-title" id="txt-wallpaper-title">Hình nền (Wallpaper)</label>
+      <div class="wallpaper-presets">
+        <button type="button" class="preset-btn active" data-preset="default">🌸 Anime Artwork</button>
+        <button type="button" class="preset-btn" data-preset="gothic">🌌 Gothic Void</button>
+        <button type="button" class="preset-btn" data-preset="arina">✨ Pure Minimal</button>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span id="txt-opacity">Độ hiển thị hình nền</span>
+          <span id="val-opacity" class="val">90%</span>
+        </div>
+        <input type="range" id="rng-opacity" min="10" max="100" value="90">
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span id="txt-blur">Độ mờ kính (Glass Blur)</span>
+          <span id="val-blur" class="val">16px</span>
+        </div>
+        <input type="range" id="rng-blur" min="0" max="30" value="16">
+      </div>
+    </section>
+
+    <section class="card">
+      <label class="section-title" id="txt-anim-title">Hoạt ảnh khởi động (12s Sequence)</label>
+      <div class="row">
+        <div>
+          <label class="title" id="txt-anim-toggle">Phát hoạt ảnh khi mở app</label>
+          <p class="desc" id="txt-anim-desc">Hiệu ứng radar, hud quét hạt và lời chào</p>
+        </div>
+        <input type="checkbox" id="chk-animation" class="toggle" checked>
+      </div>
+
+      <div class="row" style="margin-top: 14px;">
+        <div>
+          <label class="title" id="txt-sound-toggle">Âm thanh khởi động</label>
+          <p class="desc" id="txt-sound-desc">Bật tiếng chào và âm thanh công nghệ</p>
+        </div>
+        <input type="checkbox" id="chk-sound" class="toggle" checked>
+      </div>
+
+      <button type="button" id="btn-preview" class="btn btn-secondary" style="margin-top: 16px;">
+        ✨ Phát thử hoạt ảnh ngay bây giờ
+      </button>
+    </section>
+
+    <section class="card">
+      <label class="section-title" id="txt-lang-title">Ngôn ngữ hiển thị (Language)</label>
+      <select id="sel-lang" class="select-input">
+        <option value="vi">Tiếng Việt</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+      </select>
+    </section>
+
+    <div class="actions">
+      <button type="button" id="btn-save" class="btn btn-primary">
+        💾 Lưu cài đặt
+      </button>
+      <div id="status-msg" class="status-msg" hidden></div>
+    </div>
+  </div>
+</body>
+</html>

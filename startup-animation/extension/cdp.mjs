@@ -1,7 +1,14 @@
 export function pageTarget(target){
   try{
     const url=new URL(target.url),route=url.searchParams.get('initialRoute')||'/';
-    return target.type==='page'&&url.protocol==='app:'&&url.hostname==='-'&&url.pathname==='/index.html'&&!/avatar|quick.chat|detached|mini|popover|notification/i.test(route);
+    if (target.type==='page'&&url.protocol==='app:'&&url.hostname==='-'&&url.pathname==='/index.html'&&!/avatar|quick.chat|detached|mini|popover|notification/i.test(route)) {
+      return true;
+    }
+    // Antigravity Desktop support
+    if (target.type === 'page' && (url.hostname === '127.0.0.1' || url.hostname === 'localhost') && (target.title?.includes('Antigravity') || url.pathname.startsWith('/c/'))) {
+      return true;
+    }
+    return false;
   }catch{return false;}
 }
 export function localSocket(value,port){

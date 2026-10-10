@@ -1,0 +1,20 @@
+{
+  "name": "Antigravity Dream Skin",
+  "version": "1.0.0",
+  "author": "Codex Theme Team",
+  "description": "Unified Dream Skin theme and startup animation for Google Antigravity",
+  "defaultSettings": {
+    "enabled": true,
+    "wallpaper": "assets/artwork.jpg",
+    "wallpaperOpacity": 0.90,
+    "wallpaperBlur": 0,
+    "glassBlur": 16,
+    "startupAnimation": true,
+    "startupAnimationDuration": 12,
+    "soundEnabled": true,
+    "language": "vi",
+    "introTitle": "Antigravity",
+    "introCaption": "AI-First Development Platform",
+    "artworkSubtitle": "Giao diện sẵn sàng, chúc bạn một ngày làm việc hiệu quả~"
+  }
+}

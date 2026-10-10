@@ -134,8 +134,19 @@ async function main() {
   let port = portIndex >= 0 && process.argv[portIndex + 1] ? Number(process.argv[portIndex + 1]) : null;
   let bundle = null;
 
+  if (!port && process.argv.includes('--antigravity')) {
+    const portFile = !isWindows
+      ? join(os.homedir(), 'Library', 'Application Support', 'Antigravity', 'DevToolsActivePort')
+      : join(process.env.APPDATA || join(os.homedir(), 'AppData', 'Roaming'), 'Antigravity', 'DevToolsActivePort');
+    if (existsSync(portFile)) {
+      const content = (await import('node:fs/promises')).readFile(portFile, 'utf8');
+      const p = Number((await content).trim().split(/\r?\n/)[0]);
+      if (p) port = p;
+    }
+  }
+
   if (port) {
-    // Directly attaching to an existing, verified CDP port (e.g. invoked from start script)
+    // Directly attaching to an existing, verified CDP port (e.g. invoked from start script or Antigravity)
     // No need to spawn or re-open
   } else if (!isWindows) {
     // macOS standalone launcher

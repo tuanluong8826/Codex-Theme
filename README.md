@@ -75,6 +75,30 @@ Press **⌘⌥B** (macOS) or **Ctrl+Alt+B** (Windows) during or after the animat
 - **Titles & Subtitles**: Customizable intro title, intro caption, and background subtitle.
 - **Wallpaper Opacity**: Controls static wallpaper opacity after animation ends.
 
+---
+
+## 🌌 Google Antigravity Support (Antigravity IDE & 2.0)
+
+Codex Theme & Startup Animation now officially supports **Google Antigravity**:
+- **12s Startup Sequence**: Seamlessly plays as a native launcher splash or an in-app overlay with audio and particle sweeps.
+- **Dream Skin & Wallpaper**: Adds custom background artwork and sleek glassmorphism translucency across Antigravity's workbench without compromising code editor contrast.
+- **Built-in UI Extension**: An in-IDE settings panel accessible from Antigravity's Auxiliary / Side Pane.
+
+### How to use with Antigravity:
+- **macOS**:
+  - Double-click `Start Antigravity (Theme + Animation).command`
+  - Or launch `AntigravityLauncher.app`
+  - Or run: `bash antigravity/scripts/start-antigravity-skin-macos.sh`
+- **Windows**:
+  - Double-click `Start-Antigravity-With-Animation.bat` or run `AntigravityLauncher.exe`
+  - Or run PowerShell: `.\antigravity\scripts\start-antigravity-skin-windows.ps1`
+- **In-App Control Panel (Antigravity Extension)**:
+  - Open Antigravity -> Navigate to **Customizations** -> **Installed**.
+  - Enable **Codex Theme & Animation**.
+  - Open any conversation and click **⋮** (top right) -> **Codex Theme & Animation** to adjust wallpaper, blur, sound, and languages live!
+
+---
+
 ## Theme library & community
 
 <p align="center">

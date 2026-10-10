@@ -41,4 +41,7 @@ windows/theme-manager/**/bin/
 windows/theme-manager/**/obj/
 windows/launcher/**/bin/
 windows/launcher/**/obj/
+windows/antigravity-launcher/**/bin/
+windows/antigravity-launcher/**/obj/
 windows/assets/theme-manager/
+
