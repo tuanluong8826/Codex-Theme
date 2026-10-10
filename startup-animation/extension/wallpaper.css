@@ -18,34 +18,85 @@ html[data-aemeath-skin]{
   --app-shell-tab-background:rgb(var(--aemeath-base)/.32)!important;
   background:rgb(var(--aemeath-base))!important;
 }
-html[data-aemeath-skin][data-theme=light],html[data-aemeath-skin]:has(body[data-theme=light]){--aemeath-base:250 248 251}
-@media(prefers-color-scheme:light){html[data-aemeath-skin]:not([data-theme=dark]):not(:has(body[data-theme=dark])){--aemeath-base:250 248 251}}
+html[data-aemeath-skin][data-theme=light],
+html[data-aemeath-skin]:has(body[data-theme=light]),
+html[data-aemeath-skin]:has(body.theme-light),
+html[data-aemeath-skin].theme-light {
+  --aemeath-base: 250 248 251;
+}
+html[data-aemeath-skin][data-theme=dark],
+html[data-aemeath-skin]:has(body[data-theme=dark]),
+html[data-aemeath-skin]:has(body.theme-dark),
+html[data-aemeath-skin].theme-dark {
+  --aemeath-base: 20 18 24;
+}
+@media(prefers-color-scheme:light){
+  html[data-aemeath-skin]:not([data-theme=dark]):not(:has(body[data-theme=dark])):not(:has(body.theme-dark)){
+    --aemeath-base: 250 248 251;
+  }
+}
 html[data-aemeath-skin] body{
   background-color:rgb(var(--aemeath-base))!important;
-  background-image:linear-gradient(rgb(var(--aemeath-base)/var(--aemeath-wash,.58)),rgb(var(--aemeath-base)/var(--aemeath-wash,.58))),var(--aemeath-wallpaper)!important;
+  background-image:linear-gradient(rgb(var(--aemeath-base)/var(--aemeath-wash,.42)),rgb(var(--aemeath-base)/var(--aemeath-wash,.42))),var(--aemeath-wallpaper)!important;
   background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;background-attachment:fixed!important;
 }
-html[data-aemeath-skin] :is(#root,[data-app-shell-frame],[data-app-shell-page-surface=true]){background:transparent!important}
+/* Ensure full-screen app wrappers and root viewport stay transparent with NO blur,
+   so the wallpaper shines through crisply without double-fog or full-window blur. */
+html[data-aemeath-skin] :is(
+  #root,
+  #root > div,
+  [data-app-shell-frame],
+  [data-app-shell-page-surface=true],
+  div.h-screen.w-screen,
+  div.w-screen.h-\[100dvh\],
+  div.w-screen.h-screen
+){
+  background:transparent!important;
+  background-color:transparent!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
 html[data-aemeath-skin] .app-shell-left-panel{background:rgb(var(--aemeath-base)/.18)!important}
 
-/* Antigravity surfaces and glassmorphic translucency */
-html[data-aemeath-skin] .bg-background {
-  background-color: rgb(var(--aemeath-base) / .65) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-html[data-aemeath-skin] .bg-sidebar {
-  background-color: rgb(var(--aemeath-base) / .50) !important;
+/* Antigravity Sidebar: elegant frosted glass */
+html[data-aemeath-skin] div.bg-sidebar.h-full,
+html[data-aemeath-skin] div.bg-sidebar.w-full {
+  background-color: rgb(var(--aemeath-base) / .42) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
 }
-html[data-aemeath-skin] .bg-card {
-  background-color: rgb(var(--aemeath-base) / .40) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+/* Nested buttons & section headers inside sidebar: keep transparent */
+html[data-aemeath-skin] .bg-sidebar :is(.bg-sidebar:not(.h-full), button.bg-sidebar, span.bg-sidebar) {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
-/* Ensure code editor readability */
-html[data-aemeath-skin] :is(pre, code, .monaco-editor) {
+html[data-aemeath-skin] .bg-sidebar :is(button:hover, a:hover) {
+  background-color: rgb(var(--aemeath-base) / .15) !important;
+}
+
+/* Antigravity Cards & Command Blocks: translucent glass */
+html[data-aemeath-skin] :is(.bg-card, .group\/run-command) {
+  background-color: rgb(var(--aemeath-base) / .38) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Remove sticky message header & footer solid white gradient bleed */
+html[data-aemeath-skin] .md-sticky-message-bleed::after,
+html[data-aemeath-skin] .pointer-events-none.inset-x-4 {
+  display: none !important;
+}
+
+/* Chat prompt input */
+html[data-aemeath-skin] :is(form textarea, form input, [contenteditable="true"]) {
+  background-color: rgb(var(--aemeath-base) / .55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Code block readability */
+html[data-aemeath-skin] :is(pre, code, .monaco-editor, [class*="code-block"]) {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }

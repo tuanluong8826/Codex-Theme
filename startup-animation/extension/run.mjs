@@ -91,12 +91,18 @@ async function freePort() {
   });
 }
 
-export async function verifyListener(port, bundle) {
+export async function verifyListener(port, bundle, isAntigravity = false) {
   if (isWindows) {
     // Basic Windows loopback verification
     return;
   }
-  const records = await command('/usr/sbin/lsof', ['-nP', `-iTCP:${port}`, '-sTCP:LISTEN', '-Fpn']);
+  if (!port) throw new Error(msg('debugNotReady'));
+  let records = '';
+  try {
+    records = await command('/usr/sbin/lsof', ['-nP', `-iTCP:${port}`, '-sTCP:LISTEN', '-Fpn']);
+  } catch {
+    throw new Error(msg('debugNotReady'));
+  }
   const pids = [...records.matchAll(/^p(\d+)$/gm)].map(match => Number(match[1]));
   const addresses = [...records.matchAll(/^n(.+)$/gm)].map(match => match[1]);
   if (!pids.length || !addresses.length || addresses.some(value => value !== `127.0.0.1:${port}`)) {
@@ -111,7 +117,31 @@ export async function verifyListener(port, bundle) {
       if (!executable || !(await realpath(executable)).startsWith(bundle + sep)) {
         throw new Error(msg('wrongApp'));
       }
+    } else if (isAntigravity) {
+      try {
+        const comm = await command('/bin/ps', ['-p', String(pid), '-o', 'comm=']);
+        if (!comm.toLowerCase().includes('antigravity')) {
+          throw new Error(msg('wrongApp'));
+        }
+      } catch (err) {
+        if (err.message === msg('wrongApp')) throw err;
+      }
     }
+  }
+}
+
+async function getAntigravityPort() {
+  const portFile = !isWindows
+    ? join(os.homedir(), 'Library', 'Application Support', 'Antigravity', 'DevToolsActivePort')
+    : join(process.env.APPDATA || join(os.homedir(), 'AppData', 'Roaming'), 'Antigravity', 'DevToolsActivePort');
+  try {
+    if (!existsSync(portFile)) return null;
+    const fs = await import('node:fs/promises');
+    const content = await fs.readFile(portFile, 'utf8');
+    const p = Number(content.trim().split(/\r?\n/)[0]);
+    return Number.isInteger(p) && p > 0 ? p : null;
+  } catch {
+    return null;
   }
 }
 
@@ -129,24 +159,24 @@ async function findWindowsCodexExe() {
 }
 
 async function main() {
+  const isAntigravity = process.argv.includes('--antigravity');
   const portIndex = process.argv.indexOf('--port');
   const bundleIndex = process.argv.indexOf('--bundle');
-  let port = portIndex >= 0 && process.argv[portIndex + 1] ? Number(process.argv[portIndex + 1]) : null;
+  const explicitPort = portIndex >= 0 && process.argv[portIndex + 1] ? Number(process.argv[portIndex + 1]) : null;
+  let port = explicitPort;
   let bundle = null;
 
-  if (!port && process.argv.includes('--antigravity')) {
-    const portFile = !isWindows
-      ? join(os.homedir(), 'Library', 'Application Support', 'Antigravity', 'DevToolsActivePort')
-      : join(process.env.APPDATA || join(os.homedir(), 'AppData', 'Roaming'), 'Antigravity', 'DevToolsActivePort');
-    if (existsSync(portFile)) {
-      const content = (await import('node:fs/promises')).readFile(portFile, 'utf8');
-      const p = Number((await content).trim().split(/\r?\n/)[0]);
-      if (p) port = p;
+  if (isAntigravity) {
+    port = explicitPort || await getAntigravityPort();
+    if (!port) {
+      if (!isWindows) {
+        await exec('/usr/bin/open', ['-a', '/Applications/Antigravity.app']).catch(() => {});
+      } else {
+        spawn('cmd.exe', ['/c', 'start', '', 'Antigravity'], {detached: true, stdio: 'ignore'}).unref();
+      }
     }
-  }
-
-  if (port) {
-    // Directly attaching to an existing, verified CDP port (e.g. invoked from start script or Antigravity)
+  } else if (port) {
+    // Directly attaching to an existing, verified CDP port (e.g. invoked from start script or Codex)
     // No need to spawn or re-open
   } else if (!isWindows) {
     // macOS standalone launcher
@@ -181,7 +211,13 @@ async function main() {
   while (Date.now() < deadline) {
     let client;
     try {
-      await verifyListener(port, bundle);
+      if (isAntigravity && !explicitPort) {
+        const livePort = await getAntigravityPort();
+        if (livePort) port = livePort;
+      }
+      if (!port) throw new Error(msg('debugNotReady'));
+
+      await verifyListener(port, bundle, isAntigravity);
       const response = await fetch(`http://127.0.0.1:${port}/json/list`, {signal: AbortSignal.timeout(1200), redirect: 'error'});
       if (!response.ok) throw new Error(msg('debugNotReady'));
       const targets = await response.json();

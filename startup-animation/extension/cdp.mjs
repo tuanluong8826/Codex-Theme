@@ -5,8 +5,10 @@ export function pageTarget(target){
       return true;
     }
     // Antigravity Desktop support
-    if (target.type === 'page' && (url.hostname === '127.0.0.1' || url.hostname === 'localhost') && (target.title?.includes('Antigravity') || url.pathname.startsWith('/c/'))) {
-      return true;
+    if (target.type === 'page' && (url.hostname === '127.0.0.1' || url.hostname === 'localhost' || url.hostname === '')) {
+      if (target.title?.toLowerCase().includes('antigravity') || url.pathname.startsWith('/c/') || url.pathname === '/' || url.pathname.includes('index.html')) {
+        return true;
+      }
     }
     return false;
   }catch{return false;}
