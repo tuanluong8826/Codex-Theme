@@ -18,8 +18,8 @@ cp startup-animation/index.html startup-animation/style.css startup-animation/an
 cp startup-animation/assets/artwork.jpg startup-animation/assets/avatar.jpg startup-animation/assets/contours.js "$tmp_bundle/Contents/Resources/web/assets/"
 cp startup-animation/extension/*.mjs startup-animation/extension/wallpaper.css "$tmp_bundle/Contents/Resources/web/extension/"
 
-# Copy pink icon (ChatGPT / Codex pink style)
-cp "$REPO_ROOT/startup-animation/assets/codex-pink.icns" "$tmp_bundle/Contents/Resources/AppIcon.icns"
+# Copy cute pink Antigravity icon
+cp "$DIR/antigravity-pink.icns" "$tmp_bundle/Contents/Resources/AppIcon.icns"
 
 cat > "$tmp_bundle/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
