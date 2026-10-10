@@ -18,8 +18,8 @@ cp startup-animation/index.html startup-animation/style.css startup-animation/an
 cp startup-animation/assets/artwork.jpg startup-animation/assets/avatar.jpg startup-animation/assets/contours.js "$tmp_bundle/Contents/Resources/web/assets/"
 cp startup-animation/extension/*.mjs startup-animation/extension/wallpaper.css "$tmp_bundle/Contents/Resources/web/extension/"
 
-# Copy icon
-cp startup-animation/assets/codex-pink.icns "$tmp_bundle/Contents/Resources/AppIcon.icns"
+# Copy official Antigravity icon
+cp "$DIR/antigravity.icns" "$tmp_bundle/Contents/Resources/AppIcon.icns"
 
 cat > "$tmp_bundle/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -48,5 +48,12 @@ ditto --noextattr "$tmp_bundle" "$REPO_ROOT/dist/AntigravityLauncher.app"
 ditto --noextattr "$tmp_bundle" "$REPO_ROOT/AntigravityLauncher.app"
 find "$REPO_ROOT/dist/AntigravityLauncher.app" "$REPO_ROOT/AntigravityLauncher.app" -name "._*" -delete 2>/dev/null || true
 
+if [ -d "/Applications" ]; then
+  rm -rf "/Applications/AntigravityLauncher.app" 2>/dev/null || true
+  ditto --noextattr "$tmp_bundle" "/Applications/AntigravityLauncher.app" 2>/dev/null || true
+fi
+
 echo "==> Successfully built AntigravityLauncher.app!"
 echo "    Location: $REPO_ROOT/AntigravityLauncher.app"
+echo "    Location: /Applications/AntigravityLauncher.app"
+
